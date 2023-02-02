@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import {HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { AuthInterceptorInterceptor } from './_core/interceptors/auth-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -13,9 +15,12 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

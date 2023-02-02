@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SignerService } from './_core/services/signer.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent {
 
   files: File[] = [];
 
+  constructor(private signerService: SignerService) { }
   onSelect(event: any) {
     console.log(event);
     this.files.push(...event.addedFiles);
@@ -22,5 +24,6 @@ export class AppComponent {
 
   onSignFiles() {
     console.warn(this.files)
+    this.signerService.create(this.files)
   }
 }
