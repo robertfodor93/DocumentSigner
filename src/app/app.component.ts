@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Snapshot } from './_core/models/snapshot';
 import { SignerService } from './_core/services/signer.service';
 
 @Component({
@@ -9,21 +10,5 @@ import { SignerService } from './_core/services/signer.service';
 export class AppComponent {
   title = 'DocumentSigner';
 
-  files: File[] = [];
-
-  constructor(private signerService: SignerService) { }
-  onSelect(event: any) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
-  }
-
-  onRemove(event: any) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
-  }
-
-  onSignFiles() {
-    console.warn(this.files)
-    this.signerService.create(this.files)
-  }
+  
 }

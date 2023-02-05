@@ -1,0 +1,22 @@
+.sidenav{
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    position: fixed;
+    height: 99.8%;
+    overflow: auto;
+   background-color: #f8f8f8;
+  
+  }
+  .content{
+    margin-left: 20%;
+    padding: 1px 16px;
+    height: 100%;
+    width: 100%;
+    
+  }
+  .grid-container{
+      display: flex;
+     
+      
+  }
