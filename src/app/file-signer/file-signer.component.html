@@ -1,7 +1,62 @@
 <ngx-dropzone (change)="onSelect($event)">
-	<ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-	<ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-		<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-	</ngx-dropzone-preview>
+  <ngx-dropzone-label>Drag and drop or click to upload!</ngx-dropzone-label>
+
+  <ngx-dropzone-preview
+    *ngFor="let file of files"
+    [removable]="true"
+    (removed)="onRemove(file)"
+  >
+    <ngx-dropzone-label>{{ file.name }} ({{ file.type }})</ngx-dropzone-label>
+  </ngx-dropzone-preview>
 </ngx-dropzone>
-<button (click)="onSignFiles()"></button>
+
+<div>
+  
+  <div>
+    <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef="">
+          <div>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue()" [indeterminate]="selection.hasValue() && !isAllSelected()" [disabled]="base64Files.length === 0"></mat-checkbox>
+              <button mat-button (click)="onSignFiles()" [disabled]="selection.selected.length === 0"><span class="material-symbols-outlined">
+                draw
+                </span></button>
+              <button mat-button (click)="onDownload()" [disabled]="selection.selected.length === 0"><span class="material-symbols-outlined">
+                download
+                </span></button>
+              <button mat-button (click)="onRemove()" [disabled]="selection.selected.length === 0"><span class="material-symbols-outlined">
+                delete
+                </span></button>
+            </div>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let file">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(file) : null" [checked]="selection.isSelected(file)"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef="">Name</mat-header-cell>
+        <mat-cell *matCellDef="let file"> {{file.name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>Aktionen</mat-header-cell>
+        <mat-cell mat-cell *matCellDef="let file">
+          <button mat-button (click)="onSignFile(file)"><span class="material-symbols-outlined">
+			draw
+			</span></button>
+          <button mat-button (click)="onOpenViewer(file)"><span class="material-symbols-outlined">
+			preview
+			</span></button>
+          <button mat-button (click)="onDownload(file)"><span class="material-symbols-outlined">
+			download
+			</span></button>
+          <button mat-button (click)="onRemove(file)"><span class="material-symbols-outlined">
+			delete
+			</span></button>
+        </mat-cell>
+      </ng-container>
+
+	  <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+	  <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>

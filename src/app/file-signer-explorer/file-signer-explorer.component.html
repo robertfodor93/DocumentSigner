@@ -1,9 +1,0 @@
-<ngx-dropzone (change)="onSelect($event)">
-	<ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-	<ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-		<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-	</ngx-dropzone-preview>
-</ngx-dropzone>
-<div>
-<iframe width="100%" height="100%" frameBorder="0" [src]="explorerUrl()"></iframe>
-</div>

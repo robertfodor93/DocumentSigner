@@ -5,16 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import {HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS} from '@angular/common/http'
-import { AuthInterceptorInterceptor } from './_core/interceptors/auth-interceptor.interceptor';
-import { FileSignerExplorerComponent } from './file-signer-explorer/file-signer-explorer.component';
+import {HttpClientModule} from '@angular/common/http'
 import { FileSignerComponent } from './file-signer/file-signer.component';
 import { NavigationComponent } from './navigation/navigation.component';
+
+import {MatTableModule} from '@angular/material/table'
+import {MatButtonModule} from '@angular/material/button'
+import {MatCheckboxModule} from '@angular/material/checkbox'
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileSignerExplorerComponent,
     FileSignerComponent,
     NavigationComponent,
   ],
@@ -22,10 +24,12 @@ import { NavigationComponent } from './navigation/navigation.component';
     BrowserModule,
     AppRoutingModule,
     NgxDropzoneModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
